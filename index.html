@@ -1,0 +1,873 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Piccolo Trattoria Menu</title>
+<meta name="description" content="Menu for Piccolo Trattoria, 455 Main St, Roosevelt Island. Pizza, pasta, heroes, salads, beer and wine. Pickup, delivery and dine-in.">
+<meta name="theme-color" content="#B5121B">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Limelight&family=Barlow:wght@400;500;600&family=Barlow+Condensed:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --red:#B5121B; --red-deep:#8E0E15; --basil:#1D6B3B; --gold:#E2A23B;
+  --paper:#FFFFFF; --wash:#F6F2EE; --ink:#231A16; --muted:#6B605A; --line:#E7DFD7;
+  --on-red:#FFFFFF; --focus:#1D6B3B;
+  --display:"Limelight", Georgia, serif;
+  --cond:"Barlow Condensed", "Arial Narrow", system-ui, sans-serif;
+  --body:"Barlow", system-ui, -apple-system, "Segoe UI", sans-serif;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --red:#E0444C; --red-deep:#7E0C12; --basil:#6BBE88; --gold:#E9B45A;
+    --paper:#141917; --wash:#1E2522; --ink:#F2EDE7; --muted:#ABA199; --line:#2F3934;
+    --focus:#6BBE88; color-scheme: dark;
+  }
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-padding-top:120px}
+body{margin:0;background:var(--paper);color:var(--ink);font:400 16px/1.5 var(--body)}
+button,input,textarea,select{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--focus);outline-offset:2px;border-radius:4px}
+.wrap{max-width:680px;margin:0 auto;padding:0 16px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+/* Header: tablecloth strip + red band */
+.cloth{height:18px;background-color:#fff;
+  background-image:linear-gradient(90deg,rgba(181,18,27,.55) 50%,transparent 50%),linear-gradient(rgba(181,18,27,.55) 50%,transparent 50%);
+  background-size:18px 18px}
+.band{background:var(--red-deep);background:linear-gradient(180deg,#B5121B 0%,#9D0F17 100%);color:var(--on-red);text-align:center;padding:26px 0 22px}
+.mark{font:400 clamp(2.1rem,9.5vw,3.4rem)/1 var(--display);letter-spacing:.02em;margin:0}
+.serves{margin:10px 0 0;font:500 1.02rem/1.3 var(--cond);letter-spacing:.04em;opacity:.95}
+.facts{margin:14px auto 0;display:flex;flex-wrap:wrap;justify-content:center;gap:4px 18px;font-size:.95rem}
+.facts span{white-space:nowrap}
+.actions{display:flex;gap:10px;justify-content:center;margin-top:18px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;padding:0 18px;border-radius:999px;font:600 1.05rem/1 var(--cond);letter-spacing:.03em;text-decoration:none;border:2px solid transparent;cursor:pointer;background:none}
+.btn-white{background:#fff;color:#9D0F17}
+.btn-ghost{border-color:rgba(255,255,255,.7);color:#fff}
+.btn svg{width:18px;height:18px}
+
+/* Special */
+.special{background:var(--basil);color:#fff}
+.special .wrap{display:flex;gap:12px;align-items:flex-start;padding-top:14px;padding-bottom:14px}
+.special b{font:600 1.05rem/1.3 var(--cond);letter-spacing:.03em;flex:none;color:#FFE3A8}
+.special p{margin:0}
+
+/* Sticky nav */
+.nav{position:sticky;top:0;z-index:20;background:var(--paper);border-bottom:1px solid var(--line)}
+.search{display:flex;align-items:center;gap:8px;margin:12px 0 8px;padding:0 14px;height:44px;border-radius:12px;background:var(--wash)}
+.search svg{width:18px;height:18px;flex:none;color:var(--muted)}
+.search input{border:0;background:none;outline:none;flex:1;min-width:0;height:100%;font-size:1rem}
+.search input::placeholder{color:var(--muted)}
+.chips{display:flex;gap:6px;overflow-x:auto;padding:0 16px 10px;margin:0 -16px;scrollbar-width:none}
+.chips::-webkit-scrollbar{display:none}
+.chip{flex:none;border:1px solid var(--line);background:var(--paper);border-radius:999px;padding:7px 13px;font:600 .98rem/1 var(--cond);letter-spacing:.02em;color:var(--muted);text-decoration:none;white-space:nowrap}
+.chip.on{background:var(--red);border-color:var(--red);color:#fff}
+
+/* Sections */
+main{padding-bottom:28px}
+.sec{padding:30px 0 6px}
+.sec h2{font:400 1.85rem/1.1 var(--display);color:var(--basil);margin:0;letter-spacing:.01em}
+.sec .note{margin:6px 0 0;color:var(--muted);font-size:.95rem;max-width:62ch}
+.cols{display:grid;grid-template-columns:1fr repeat(var(--n),4.1rem);gap:0 4px;margin-top:14px;padding-bottom:4px;border-bottom:2px solid var(--ink);font:600 .9rem/1.2 var(--cond);color:var(--muted);text-align:right}
+.items{list-style:none;margin:8px 0 0;padding:0}
+.item{padding:12px 0;border-bottom:1px dashed var(--line)}
+.item:last-child{border-bottom:0}
+.row{display:flex;align-items:baseline;gap:8px}
+.name{font:600 1.18rem/1.25 var(--cond);letter-spacing:.01em}
+.lead{flex:1;min-width:16px;border-bottom:2px dotted var(--line);transform:translateY(-4px)}
+.price{font:600 1.18rem/1 var(--cond);font-variant-numeric:tabular-nums;color:var(--red);white-space:nowrap}
+.multi{display:flex;flex-wrap:wrap;gap:2px 14px;margin-top:4px;font:500 1.02rem/1.3 var(--cond);color:var(--muted)}
+.multi b{color:var(--red);font-weight:600;font-variant-numeric:tabular-nums;margin-left:4px}
+.grid{display:grid;grid-template-columns:1fr repeat(var(--n),4.1rem);gap:0 4px;align-items:baseline}
+.grid .price{text-align:right}
+.grid .na{color:var(--muted);font-weight:500}
+.desc{margin:3px 0 0;color:var(--muted);font-size:.95rem;max-width:58ch}
+.tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
+.tag{font:600 .82rem/1 var(--cond);letter-spacing:.03em;padding:4px 8px;border-radius:999px;border:1.5px solid var(--basil);color:var(--basil)}
+.tag.out{border-color:var(--red);background:var(--red);color:#fff}
+.tag.hid{border-color:var(--muted);color:var(--muted)}
+.item.is-out .name,.item.is-out .price{opacity:.45}
+.item.is-out .price{text-decoration:line-through}
+.empty{padding:40px 0;text-align:center;color:var(--muted)}
+
+footer{background:var(--wash);color:var(--muted);font-size:.88rem;padding:26px 0 34px}
+footer p{margin:0 0 8px;max-width:64ch}
+footer .lnk{background:none;border:0;padding:8px 0;color:var(--muted);text-decoration:underline;cursor:pointer;font-size:.88rem}
+
+/* Owner mode */
+.owner-bar{display:none}
+body.owner .owner-bar{display:block;position:fixed;left:0;right:0;bottom:0;z-index:40;background:var(--basil);color:#fff;padding:10px 0 calc(10px + env(safe-area-inset-bottom))}
+body.owner{padding-bottom:96px}
+.owner-bar .wrap{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.owner-bar .status{flex:1 1 160px;font:600 1rem/1.25 var(--cond)}
+.owner-bar .status small{display:block;font:400 .85rem/1.3 var(--body);opacity:.85}
+.obtn{min-height:40px;padding:0 13px;border-radius:10px;border:1.5px solid rgba(255,255,255,.65);background:transparent;color:#fff;font:600 .98rem/1 var(--cond);letter-spacing:.02em;cursor:pointer}
+.obtn.solid{background:#fff;color:var(--basil);border-color:#fff}
+.own-tools{display:none}
+body.owner .own-tools{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.tbtn{min-height:36px;padding:0 12px;border-radius:9px;border:1.5px solid var(--line);background:var(--paper);color:var(--ink);font:600 .95rem/1 var(--cond);letter-spacing:.02em;cursor:pointer}
+.tbtn.warn{color:var(--red);border-color:var(--red)}
+.tbtn.ok{color:var(--basil);border-color:var(--basil)}
+.add-sec{display:none;margin:24px 0 0}
+body.owner .add-sec{display:block}
+.item.hidden-item{opacity:.55}
+
+/* Dialogs */
+dialog{border:0;border-radius:18px;padding:0;width:min(560px,calc(100vw - 24px));max-height:calc(100dvh - 24px);background:var(--paper);color:var(--ink);box-shadow:0 20px 60px rgba(0,0,0,.35)}
+dialog::backdrop{background:rgba(20,10,8,.55)}
+.dlg{display:flex;flex-direction:column;max-height:calc(100dvh - 24px)}
+.dlg header{padding:18px 20px 10px;border-bottom:1px solid var(--line)}
+.dlg header h3{margin:0;font:400 1.5rem/1.15 var(--display);color:var(--basil)}
+.dlg header p{margin:4px 0 0;color:var(--muted);font-size:.92rem}
+.dlg .body{padding:14px 20px;overflow:auto}
+.dlg .foot{display:flex;gap:8px;flex-wrap:wrap;padding:12px 20px 16px;border-top:1px solid var(--line)}
+.dlg .foot .grow{flex:1}
+.fld{display:block;margin:0 0 14px}
+.fld > span{display:block;font:600 .95rem/1.2 var(--cond);letter-spacing:.02em;margin-bottom:5px}
+.fld input[type=text],.fld input[type=number],.fld input[type=password],.fld input[type=tel],.fld input[type=url],.fld textarea{width:100%;border:1.5px solid var(--line);border-radius:10px;background:var(--paper);padding:10px 12px;min-height:44px}
+.fld textarea{min-height:70px;resize:vertical}
+.fld input:focus,.fld textarea:focus{outline:none;border-color:var(--basil)}
+.hint{color:var(--muted);font-size:.85rem;margin-top:4px}
+.prow{display:grid;grid-template-columns:1fr 7.5rem 44px;gap:8px;margin-bottom:8px;align-items:center}
+.prow.fixed{grid-template-columns:1fr 7.5rem}
+.prow input{width:100%;border:1.5px solid var(--line);border-radius:10px;background:var(--paper);padding:9px 11px;min-height:44px}
+.prow .lbl{font:600 1rem/1.2 var(--cond)}
+.x{width:44px;height:44px;border-radius:10px;border:1.5px solid var(--line);background:none;cursor:pointer;font-size:1.2rem;color:var(--muted)}
+.toggles{display:flex;flex-wrap:wrap;gap:8px}
+.tog{display:inline-flex;align-items:center;gap:8px;border:1.5px solid var(--line);border-radius:999px;padding:8px 13px;cursor:pointer;font:600 .98rem/1 var(--cond)}
+.tog input{width:18px;height:18px;accent-color:var(--basil);margin:0}
+.dbtn{min-height:44px;padding:0 16px;border-radius:10px;border:1.5px solid var(--line);background:var(--paper);font:600 1.02rem/1 var(--cond);letter-spacing:.02em;cursor:pointer}
+.dbtn.primary{background:var(--basil);border-color:var(--basil);color:#fff}
+.dbtn.danger{color:var(--red);border-color:var(--red)}
+.pin{font:600 1.6rem/1 var(--cond);letter-spacing:.4em;text-align:center}
+.err{color:var(--red);font-size:.9rem;min-height:1.2em;margin:4px 0 0}
+.divider{border:0;border-top:1px solid var(--line);margin:18px 0}
+.qrcard{border:2px solid var(--ink);border-radius:16px;padding:20px;text-align:center;max-width:300px;margin:0 auto;background:#fff;color:#231A16}
+.qrcard .m{font:400 1.6rem/1.05 var(--display);color:#B5121B;margin:0 0 4px}
+.qrcard .s{font:600 1.05rem/1.2 var(--cond);margin:0 0 12px}
+.qrcard #qr{display:flex;justify-content:center}
+.qrcard #qr img,.qrcard #qr canvas{width:200px;height:200px}
+.qrcard .u{font-size:.75rem;color:#6B605A;margin:10px 0 0;word-break:break-all}
+
+.toast{position:fixed;left:50%;bottom:110px;transform:translateX(-50%) translateY(20px);opacity:0;pointer-events:none;background:var(--ink);color:var(--paper);padding:10px 14px;border-radius:12px;display:flex;gap:12px;align-items:center;z-index:60;transition:opacity .2s,transform .2s;max-width:calc(100vw - 32px)}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0);pointer-events:auto}
+.toast button{background:none;border:0;color:var(--gold);font:600 1rem/1 var(--cond);cursor:pointer;padding:6px}
+body:not(.owner) .toast{bottom:24px}
+
+@media (prefers-reduced-motion: reduce){*{transition:none!important;scroll-behavior:auto!important}}
+@media print{
+  body *{visibility:hidden}
+  #qrDlg, #qrDlg *{visibility:visible}
+  #qrDlg{position:fixed;inset:0;box-shadow:none;width:100%;max-height:none}
+  #qrDlg .foot,#qrDlg header,#qrDlg .fld{display:none}
+}
+</style>
+</head>
+<body>
+
+<div class="cloth" aria-hidden="true"></div>
+<header class="band">
+  <div class="wrap">
+    <h1 class="mark" id="mName">Piccolo Trattoria</h1>
+    <p class="serves" id="mServes">Pickup, delivery and dine-in. Slices, beer and wine.</p>
+    <div class="facts">
+      <span id="mHours">Open daily 11am to 10pm</span>
+      <span id="mAddr">455 Main St, Roosevelt Island</span>
+    </div>
+    <div class="actions">
+      <a class="btn btn-white" id="callBtn" href="tel:2127532300">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg>
+        <span>Call to order <span id="mPhone">212-753-2300</span></span>
+      </a>
+      <a class="btn btn-ghost" id="mapBtn" target="_blank" rel="noopener" href="#">Directions</a>
+    </div>
+  </div>
+</header>
+
+<section class="special" id="special" hidden aria-label="Today's special">
+  <div class="wrap"><b>Today's special</b><p id="specialText"></p></div>
+</section>
+
+<nav class="nav" aria-label="Menu sections">
+  <div class="wrap">
+    <label class="search">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+      <span class="sr">Search the menu</span>
+      <input id="q" type="search" placeholder="Search the menu, e.g. calzone" autocomplete="off">
+    </label>
+    <div class="chips" id="chips"></div>
+  </div>
+</nav>
+
+<main class="wrap" id="menu" aria-live="polite"></main>
+<div class="wrap add-sec"><button class="tbtn ok" id="addSecBtn">Add a new section</button></div>
+
+<footer>
+  <div class="wrap">
+    <p>If you have a food allergy, please tell us when you order.</p>
+    <p>Consuming raw or undercooked meat, poultry, seafood, shellfish or eggs may increase your risk of food-borne illness, especially if you have certain medical conditions.</p>
+    <p>Prices and menu items may change without notice. Catering available for all occasions.</p>
+    <button class="lnk" id="ownerLink">Owner sign-in</button>
+  </div>
+</footer>
+
+<div class="owner-bar" role="region" aria-label="Owner tools">
+  <div class="wrap">
+    <div class="status" id="ownStatus">Owner mode<small>Tap Edit on any dish to change it</small></div>
+    <button class="obtn" id="infoBtn">Restaurant info</button>
+    <button class="obtn" id="qrBtn">QR code</button>
+    <button class="obtn solid" id="exitBtn">Done</button>
+  </div>
+</div>
+
+<div class="toast" id="toast" role="status"><span id="toastMsg"></span><button id="toastUndo" hidden>Undo</button></div>
+
+<!-- PIN -->
+<dialog id="pinDlg" aria-labelledby="pinH">
+  <form class="dlg" method="dialog" id="pinForm">
+    <header><h3 id="pinH">Owner sign-in</h3><p>Enter the owner PIN to edit the menu.</p></header>
+    <div class="body">
+      <label class="fld"><span>PIN</span><input class="pin" id="pinIn" type="password" inputmode="numeric" autocomplete="off" maxlength="8"></label>
+      <p class="err" id="pinErr"></p>
+    </div>
+    <div class="foot"><span class="grow"></span><button type="button" class="dbtn" data-close>Cancel</button><button class="dbtn primary" value="ok">Sign in</button></div>
+  </form>
+</dialog>
+
+<!-- Item editor -->
+<dialog id="itemDlg" aria-labelledby="itemH">
+  <form class="dlg" method="dialog" id="itemForm">
+    <header><h3 id="itemH">Edit dish</h3><p id="itemSec"></p></header>
+    <div class="body">
+      <label class="fld"><span>Dish name</span><input type="text" id="iName" required></label>
+      <label class="fld"><span>Description</span><textarea id="iDesc" placeholder="Optional, e.g. fresh mozzarella, basil and olive oil"></textarea></label>
+      <div class="fld"><span>Prices ($)</span><div id="iPrices"></div><button type="button" class="tbtn" id="iAddPrice">Add a size or option</button><p class="hint" id="iPriceHint">Leave a price blank if this dish doesn't come in that size.</p></div>
+      <div class="fld"><span>Show on the menu</span>
+        <div class="toggles">
+          <label class="tog"><input type="checkbox" id="iOut">Sold out today</label>
+          <label class="tog"><input type="checkbox" id="iHide">Hide from customers</label>
+        </div>
+      </div>
+      <div class="fld"><span>Labels</span><div class="toggles" id="iTags"></div></div>
+      <div class="toggles"><button type="button" class="tbtn" id="iUp">Move up</button><button type="button" class="tbtn" id="iDown">Move down</button><button type="button" class="tbtn warn" id="iDel">Delete dish</button></div>
+    </div>
+    <div class="foot"><span class="grow"></span><button type="button" class="dbtn" data-close>Cancel</button><button class="dbtn primary" value="ok">Save changes</button></div>
+  </form>
+</dialog>
+
+<!-- Section editor -->
+<dialog id="secDlg" aria-labelledby="secH">
+  <form class="dlg" method="dialog" id="secForm">
+    <header><h3 id="secH">Edit section</h3></header>
+    <div class="body">
+      <label class="fld"><span>Section name</span><input type="text" id="sName" required></label>
+      <label class="fld"><span>Note under the name</span><textarea id="sNote" placeholder="Optional, e.g. All pastas come with garlic bread"></textarea></label>
+      <label class="fld"><span>Size columns</span><input type="text" id="sCols" placeholder="Optional, e.g. Personal, Large, X-Large"><p class="hint">Separate sizes with commas. Leave blank for one price per dish.</p></label>
+      <div class="fld"><span>Show on the menu</span><div class="toggles"><label class="tog"><input type="checkbox" id="sHide">Hide this section</label></div></div>
+      <hr class="divider">
+      <div class="fld"><span>Change every price in this section</span>
+        <div class="prow fixed"><input type="number" id="sPct" step="0.5" placeholder="e.g. 5 or -5"><button type="button" class="tbtn ok" id="sApplyPct">Apply %</button></div>
+        <p class="hint">Raises or lowers all prices here by that percent, rounded to the nearest cent.</p>
+      </div>
+      <div class="toggles"><button type="button" class="tbtn" id="sUp">Move section up</button><button type="button" class="tbtn" id="sDown">Move section down</button><button type="button" class="tbtn warn" id="sDel">Delete section</button></div>
+    </div>
+    <div class="foot"><span class="grow"></span><button type="button" class="dbtn" data-close>Cancel</button><button class="dbtn primary" value="ok">Save changes</button></div>
+  </form>
+</dialog>
+
+<!-- Restaurant info -->
+<dialog id="infoDlg" aria-labelledby="infoH">
+  <form class="dlg" method="dialog" id="infoForm">
+    <header><h3 id="infoH">Restaurant info</h3></header>
+    <div class="body">
+      <label class="fld"><span>Today's special</span><textarea id="fSpecial" placeholder="Shows in a green banner at the top. Leave blank to hide it."></textarea></label>
+      <label class="fld"><span>Restaurant name</span><input type="text" id="fName"></label>
+      <label class="fld"><span>Tagline</span><input type="text" id="fServes"></label>
+      <label class="fld"><span>Hours</span><input type="text" id="fHours"></label>
+      <label class="fld"><span>Phone</span><input type="tel" id="fPhone"></label>
+      <label class="fld"><span>Address</span><input type="text" id="fAddr"></label>
+      <label class="fld"><span>New owner PIN</span><input type="password" id="fPin" inputmode="numeric" maxlength="8" placeholder="Leave blank to keep the current PIN"></label>
+      <hr class="divider">
+      <div class="fld"><span>Backup</span>
+        <div class="toggles">
+          <button type="button" class="tbtn" id="exportBtn">Download menu backup</button>
+          <button type="button" class="tbtn" id="importBtn">Restore from backup</button>
+          <button type="button" class="tbtn warn" id="resetBtn">Reset to printed menu</button>
+        </div>
+        <input type="file" id="importFile" accept="application/json,.json" hidden>
+      </div>
+    </div>
+    <div class="foot"><span class="grow"></span><button type="button" class="dbtn" data-close>Cancel</button><button class="dbtn primary" value="ok">Save changes</button></div>
+  </form>
+</dialog>
+
+<!-- QR -->
+<dialog id="qrDlg" aria-labelledby="qrH">
+  <div class="dlg">
+    <header><h3 id="qrH">Table QR code</h3><p>Print this card for tables and the counter.</p></header>
+    <div class="body">
+      <label class="fld"><span>Menu web address</span><input type="url" id="qrUrl"><p class="hint" id="qrHint"></p></label>
+      <div class="qrcard">
+        <p class="m" id="qrName">Piccolo Trattoria</p>
+        <p class="s">Scan to see our menu</p>
+        <div id="qr"></div>
+        <p class="u" id="qrShow"></p>
+      </div>
+    </div>
+    <div class="foot"><span class="grow"></span><button type="button" class="dbtn" data-close>Close</button><button type="button" class="dbtn primary" id="printQr">Print card</button></div>
+  </div>
+</dialog>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script>
+/* ---------- Settings ----------
+   MENU_API: leave blank and edits save on the owner's device only.
+   Set it to a hosted save service (GET/PUT JSON) to publish edits to every customer. */
+const MENU_API = "";
+const STORE_KEY = "piccolo-menu-v1";
+const DEFAULT_PIN = "2026";
+const TAGS = ["New", "Chef's pick", "Spicy", "Vegetarian", "Gluten-free"];
+
+/* ---------- Printed menu (2026–2027) ---------- */
+function S(name, note, items, cols){ return {name, note: note || "", cols: cols || [], hidden:false, items: items.map(mk)}; }
+function mk(a){
+  const [name, desc, p, tags] = a;
+  let prices;
+  if (typeof p === "number") prices = [{label:"", price:p}];
+  else prices = p.map(([label, price]) => ({label, price}));
+  return {name, desc: desc || "", prices, tags: tags || [], out:false, hidden:false};
+}
+const PZ = (a,b,c) => [["Personal",a],["Large",b],["X-Large",c]].filter(x => x[1] != null);
+const DEFAULT_MENU = {
+  info:{
+    name:"Piccolo Trattoria",
+    serves:"Pickup, delivery and dine-in. Slices, beer and wine.",
+    hours:"Open daily 11am to 10pm",
+    phone:"212-753-2300",
+    addr:"455 Main St, Roosevelt Island, NY 10044",
+    special:""
+  },
+  pin: DEFAULT_PIN,
+  sections:[
+    S("Pizza", "Classic cheese, or build your own. Plain, Sicilian and specialty slices at the counter.", [
+      ["Cheese Pizza","",PZ(10.99,22.49,26.99)],
+      ["Each Extra Topping","Pepperoni, sausage, spicy sausage, meatballs, chicken, anchovies, ham, prosciutto, bacon, mushrooms, green peppers, onions, black olives, broccoli, spinach, tomatoes, jalapeños, pineapple, eggplant, fresh garlic or extra cheese. On half a large pie 2.49",PZ(2.99,4.49,4.99)],
+      ["Meat Supreme","Pepperoni, sausage, mushrooms, peppers and onions",PZ(14.99,27.99,29.99)],
+      ["Meat Lovers","Pepperoni, sausage, ham and bacon",PZ(14.99,27.99,32.00)],
+      ["Vegetarian","Broccoli, mushrooms, tomatoes and onions",PZ(14.99,27.99,32.00)],
+      ["Hawaiian","Light sauce, pineapple and ham",PZ(14.99,27.99,29.00)],
+      ["Buffalo Chicken","Chicken marinated in buffalo sauce, with blue cheese",PZ(14.99,27.99,32.00)],
+      ["BBQ Chicken","Chicken marinated in BBQ sauce",PZ(14.99,27.99,32.00)],
+      ["White Pizza","Mozzarella, ricotta and parmesan",PZ(14.99,25.99,32.00)],
+      ["Chicken Ranch","Chicken cutlet, bacon, tomatoes and ranch",PZ(14.99,27.99,32.00)],
+      ["Margherita","Fresh mozzarella, basil, parmesan and olive oil",PZ(14.99,25.99,32.00)],
+      ["Cheesesteak","Marinated steak with mozzarella",PZ(16.99,29.99,32.99)],
+      ["Chicken Parm","",PZ(13.99,25.99,31.99)],
+      ["Grandma Pie","Cheese, sauce, basil, parmesan and olive oil",PZ(null,26.99,null)],
+      ["Sicilian (9 slices)","Cheese, pizza sauce and a deep-dish square crust",PZ(null,23.99,null)],
+      ["Three Cheese Pizza","Mozzarella, provolone and fresh mozzarella",PZ(14.99,29.99,32.00)],
+      ["Taco Pizza","Chicken or ground beef, mozzarella, lettuce, tomato, onions and yellow cheese",PZ(14.99,28.99,31.00)],
+      ["Baked Ziti Pizza","",PZ(12.99,27.99,31.99)],
+      ["Shrimp Pizza","",PZ(14.99,28.99,32.99)],
+      ["Pizza with More Than 3 Toppings","",PZ(null,31.00,32.99)]
+    ], ["Personal","Large","X-Large"]),
+    S("Gluten-Free Pizza", "", [
+      ["Gluten-Free Pizza 14\"","",24.99,["Gluten-free"]],
+      ["Gluten-Free Margherita 14\"","",25.99,["Gluten-free"]],
+      ["Cauliflower Crust 14\"","",24.99],
+      ["Gluten-Free Topping","Each",4.49]
+    ]),
+    S("Pizza Rolls & Calzones", "Made from scratch. Dough stuffed with mozzarella, served with marinara. Additional topping 2.99.", [
+      ["Chicken Roll","Chicken cutlet, mozzarella and sauce",10.99],
+      ["Sausage Roll","Peppers, onions and mozzarella",10.99],
+      ["Spinach Roll","Baby spinach and mozzarella",10.99],
+      ["Pepperoni Roll","",10.99],
+      ["Calzone","Mozzarella and ricotta",10.99],
+      ["Pepperoni Calzone","Pepperoni, mozzarella and ricotta",12.99]
+    ]),
+    S("Appetizers", "", [
+      ["Zucchini Sticks (9)","Breaded zucchini with marinara",11.99],
+      ["Mozzarella Sticks (5)","Breaded cheese sticks with marinara",9.49],
+      ["Fried Shrimp","Breaded whole shrimp with marinara and fries",13.99],
+      ["Garlic Bread","Whole loaf toasted with garlic butter. Add mozzarella 1.99",5.99],
+      ["Garlic Knots","",[["4 pc",3.99],["6 pc",5.99]]],
+      ["Garlic Knots with Mozzarella","",[["4 pc",5.40],["6 pc",7.40]]],
+      ["Pizza Garlic Knots","",[["4 pc",5.99],["6 pc",7.99]]],
+      ["Onion Rings","Fried breaded onion slices",11.95],
+      ["French Fries","Regular or sweet potato",5.99],
+      ["Cheese Fries","",7.50],
+      ["Mega Fries","Fries with cheese whiz, mozzarella and bacon",10.99],
+      ["Mozzarella Fries","",8.99],
+      ["Bruschetta","Toasted bread topped with marinated diced tomatoes and red onion",12.99],
+      ["Bruschetta with Fresh Mozzarella","",13.99],
+      ["Sautéed Vegetables","Spinach, broccoli or mixed vegetables",[["",12.99],["With grilled chicken",15.99]]],
+      ["Quesadillas","Chicken, steak, buffalo chicken or vegetables, with fries",12.99],
+      ["Beef Patty","",[["",4.25],["With cheese",5.49]]],
+      ["Chicken Fingers (4)","Fried chicken strips. Add fries 2.50",11.49],
+      ["Fried Calamari","Breaded calamari, lightly fried, with marinara",18.99]
+    ]),
+    S("Wings", "Traditional or boneless. Hot, mild or BBQ sauce, with blue cheese or ranch.", [
+      ["Wings","",[["6 pc",10.99],["6 pc with fries",12.99],["12 pc",19.99],["12 pc with fries",21.99]]]
+    ]),
+    S("Signature Salads", "Dressings: Italian, ranch, blue cheese, balsamic vinaigrette or French.", [
+      ["Garden Salad","Romaine, tomatoes, cucumbers, red onions, carrots and bell peppers",11.49],
+      ["Grilled Chicken Salad","",15.99],
+      ["Caesar Salad","Romaine, croutons and parmesan with Caesar dressing",11.49],
+      ["Grilled Chicken Caesar Salad","",15.99],
+      ["Italian Salad","Romaine, sun-dried tomatoes, black olives, roasted peppers and fresh mozzarella with house Italian dressing",14.99],
+      ["Antipasto Salad","Romaine, ham, pepperoni, salami, fresh mozzarella, sun-dried tomatoes, mushrooms, black olives and roasted peppers with house Italian dressing",14.99],
+      ["Greek Salad","Romaine, feta, cucumbers, tomatoes, black olives, pepperoncini and red onions with house Italian dressing",14.99],
+      ["Capri Salad","Mixed greens, fresh mozzarella, tomatoes, roasted peppers, basil and balsamic glaze",14.99],
+      ["Chef Salad","Romaine, ham, turkey, tomatoes, cucumbers, peppers, American cheese and olives with house Italian dressing",14.99],
+      ["Buffalo Chicken Salad","",14.99],
+      ["Shrimp Salad","",15.99],
+      ["Chicken Parm Salad","Half chicken parm, half lettuce, tomatoes and onions",14.99],
+      ["Tuna Salad","Garden or Caesar",14.99],
+      ["Turkey Salad","Garden or Caesar",14.99],
+      ["Mozzarella Salad","",13.99],
+      ["Prosciutto & Fresh Mozzarella Salad","",15.99],
+      ["Chicken Alfredo Salad","Half chicken alfredo, half lettuce, tomato and onions",17.99]
+    ]),
+    S("Soups", "", [["Chicken Noodle","",7.99],["Minestrone","",7.99],["Lentil","",7.99]]),
+    S("Traditional Pasta", "Choice of spaghetti, linguini, penne or fettuccine, with garlic bread. Add chicken or meatballs 4.99, add shrimp 6.95.", [
+      ["Marinara Sauce","",15.99],["Meat Sauce","",17.99],["Garlic & Oil","",15.99],["Alfredo Sauce","",19.99],
+      ["Bolognese","",19.99],["Pesto Sauce","",19.99],["Vodka Sauce","",19.99],["Sausage","",19.99],
+      ["Carbonara Sauce","",19.99],["Clam Sauce","White or red",19.99],["Cream Rosa","",19.99]
+    ]),
+    S("Specialty Pasta", "Choice of spaghetti, linguini, penne or fettuccine, with garlic bread.", [
+      ["Pasta Primavera","Sautéed vegetables in garlic and oil",19.99],
+      ["Pasta Arrabbiata","Sautéed tomatoes with garlic and oil, simmered in spicy marinara",19.99],
+      ["Eggplant Parmigiana","Breaded eggplant with marinara",19.99],
+      ["Veal Parmigiana","Veal cutlet with melted mozzarella in marinara",23.99],
+      ["Pasta with Broccoli, Chicken, Garlic & Oil","",23.99],
+      ["Potato Gnocchi","With marinara and basil, or bolognese",19.99],
+      ["Pasta with Sautéed Spinach","Garlic and oil, or marinara",18.99],
+      ["Chicken Piccata","",23.99]
+    ]),
+    S("Ravioli & Baked Pasta", "Served with bread. Alfredo sauce 3.99 extra.", [
+      ["Cheese Ravioli","",13.99],["Lobster Ravioli","",17.99],["Baked Ziti","",14.99],["Meat Lasagna","",19.99],
+      ["Stuffed Shells","",15.99],["Baked Ziti with Chicken","",19.99],["Baked Ziti with Meatball","",19.99]
+    ]),
+    S("Entrées", "Choice of spaghetti, linguini, fettuccine or penne, with bread.", [
+      ["Chicken Parmigiana","Chicken cutlet, melted mozzarella in marinara",22.99],
+      ["Chicken Marsala","Sautéed chicken with mushrooms in Marsala wine sauce",21.99],
+      ["Chicken Francese","Sautéed chicken dipped in egg, with lemon, butter and wine",22.99],
+      ["Chicken Cacciatore","Sautéed with onions, peppers and mushrooms in marinara",22.99],
+      ["Mussels Marinara","Mussels in marinara sauce",22.99],
+      ["Shrimp Parmigiana","Breaded shrimp with melted mozzarella in marinara",22.99],
+      ["Shrimp Francese","Dipped in egg, with lemon, butter and wine",22.99],
+      ["Seafood Frutti di Mare","Mussels, clams, scallops and shrimp in marinara",23.99],
+      ["Ribeye Steak","Cooked to your liking, with 2 sides: fries, salad, broccoli or mixed vegetables",28.99]
+    ]),
+    S("Signature Sandwiches", "Same price on a hero, roll or wrap.", [
+      ["Italian","Capicola, salami, ham, provolone, lettuce, tomatoes, oil and vinegar",11.99],
+      ["Antipasto","Prosciutto, mortadella, capicola, salami, provolone, roasted peppers, lettuce, tomatoes, oil and vinegar",11.99],
+      ["American","Ham, turkey, American cheese, lettuce and tomatoes with mayo",11.99],
+      ["Veggie","Fresh mozzarella, eggplant, zucchini, lettuce, tomatoes and roasted peppers",11.99],
+      ["Buffalo Chicken","Chicken cutlet, lettuce and tomatoes",11.99],
+      ["BBQ Chicken","Chicken cutlet, lettuce and tomatoes",11.99],
+      ["Honey Chicken","Chicken cutlet, honey mustard, lettuce and tomatoes",11.99],
+      ["Tuna Sandwich","Lettuce, tomato, onions and cheese",11.99],
+      ["Turkey Sandwich","Lettuce, tomato, onions and cheese",11.99],
+      ["Prosciutto & Fresh Mozzarella","",11.99],
+      ["Breaded Chicken","Lettuce, tomato and onions",11.99]
+    ]),
+    S("Hot Heroes", "", [
+      ["Meatball Parmigiana","",11.49],["Sausage & Peppers Parmigiana","",11.49],["Homemade Eggplant Parmigiana","",11.49],
+      ["Chicken Parmigiana","",11.49],["Veal Cutlet Parmigiana","",12.99],["Shrimp Parmigiana","",13.99],
+      ["Piccolo BLT","Bacon, lettuce, tomatoes and onions. Add avocado 1.99",11.99],["Bacon, Egg & Cheese","",8.99]
+    ]),
+    S("Philly Steaks", "Add fries 2.49. Choose American, provolone or mozzarella. Toppings 0.75: lettuce, tomatoes, mushrooms, pickles, jalapeños.", [
+      ["Philly Cheesesteak","",11.49],["Cheesesteak with Green Peppers","",11.99],
+      ["Cheesesteak with Lettuce, Tomato & Onions","",13.99],["Buffalo Chicken Cheesesteak","",11.99]
+    ]),
+    S("Paninis", "", [
+      ["Grilled Chicken","Provolone or mozzarella with lettuce and tomato",12.99],
+      ["Ham","",12.99],
+      ["Prosciutto","Fresh mozzarella, olive oil and basil",12.99]
+    ]),
+    S("Focaccia Combos", "Each comes with fries and a can of soda.", [
+      ["#1 Eggplant & Spinach","",14.49],["#2 Chicken & Spinach","",14.49],["#3 Chicken Parm","",14.99],
+      ["#4 Vegetable","",14.49],["#5 Ham","",14.49],["#6 Prosciutto & Fresh Mozzarella","",14.99]
+    ]),
+    S("Club Sandwiches", "On white bread with a side of fries.", [["BLT Club","",12.99],["Turkey Bacon Club","",12.99]]),
+    S("Burgers & Combos", "Numbered combos come with fries and a can of soda.", [
+      ["Classic Cheeseburger","Lettuce, tomatoes and onions. No fries",13.99],
+      ["Impossible Burger","Lettuce, tomatoes, onions and pickles. No fries",14.99],
+      ["#1 Cheeseburger Combo","",14.99],["#2 Double Cheeseburger Combo","",16.99],["#3 Bacon Cheeseburger Combo","",16.99],
+      ["#4 Chicken Burger Combo","",14.49],["#5 Spicy Chicken Combo","",14.49],["#6 Grilled Chicken Burger Combo","",14.49],
+      ["#7 Chicken Gyro Combo","",14.99],["#8 Lamb Gyro Combo","",14.99],["#9 Gyro Burger Combo","Chicken or lamb, with American cheese",14.99]
+    ]),
+    S("Gyros", "Make it a combo with fries and a can of soda for 1.50 more.", [["Chicken or Lamb Gyro","",11.99]]),
+    S("Sides", "", [["Spinach or Broccoli","",11.00],["Mixed Vegetables","",11.00],["Italian Sausage","",11.99],["Italian Meatballs","",11.99]]),
+    S("Desserts", "", [["Cheesecake","",7.99],["Red Velvet Cake","",7.99],["Chocolate Mousse Cake","",7.99],["Tiramisu","",7.99],["Cannoli","",7.99]]),
+    S("Cold Drinks", "", [
+      ["Soda Can","Assorted flavors",1.99],["Soda Bottle 20 oz","Assorted flavors",3.49],["Snapple","Assorted flavors",3.75],
+      ["Pellegrino","Assorted flavors",3.49],["Red Bull","",3.49],["Milkshake","Chocolate, vanilla or strawberry",6.99],["Jarritos","",3.99]
+    ]),
+    S("Hot Drinks", "", [["Coffee","",3.49],["Hot Tea","",3.49],["Cappuccino","",4.99],["Hot Chocolate","",3.49],["Single Espresso","",4.49],["Double Espresso","",5.99]]),
+    S("Beer & Wine", "", [
+      ["Peroni","Bottle",6.49],["Corona","Bottle",6.49],["Seasonal Bottle","",6.49],
+      ["Stella Artois","Draft",7.49],["Brooklyn Lager","Draft",7.49],["IPA","Draft",7.49],["Seasonal Draft","",7.49],
+      ["Wine by the Glass","Merlot, Cabernet, Pinot Grigio, Chardonnay or Rosato",8.50],["Sangria","By the glass",8.75],["Wine by the Bottle","",26.99]
+    ]),
+    S("Catering", "Catering for all occasions. Call to order.", [
+      ["Mozzarella Sticks","",[["Half tray",65.00],["Full tray",95.00]]],
+      ["Buffalo Wings","",[["Half tray",75.00],["Full tray",105.00]]],
+      ["Italian Salad","",[["Half tray",55.00],["Full tray",85.00]]],
+      ["Antipasto Salad","",[["Half tray",85.00],["Full tray",135.00]]],
+      ["Grilled Chicken Salad","",[["Half tray",85.00],["Full tray",135.00]]],
+      ["Chicken Fingers","",[["Half tray",90.00],["Full tray",125.00]]],
+      ["Pasta with Alfredo Sauce","",[["Half tray",75.00],["Full tray",125.00]]],
+      ["Pasta with Vodka Sauce","",[["Half tray",75.00],["Full tray",125.00]]]
+    ], ["Half tray","Full tray"])
+  ]
+};
+
+/* ---------- State ---------- */
+const clone = o => JSON.parse(JSON.stringify(o));
+let menu = clone(DEFAULT_MENU);
+let memoryStore = null;
+let owner = false;
+let lastSnapshot = null;
+
+function readLocal(){ try { return localStorage.getItem(STORE_KEY); } catch(e){ return memoryStore; } }
+function writeLocal(s){ try { localStorage.setItem(STORE_KEY, s); } catch(e){ memoryStore = s; } }
+
+async function load(){
+  if (MENU_API){
+    try { const r = await fetch(MENU_API, {cache:"no-store"}); if (r.ok){ menu = await r.json(); return; } } catch(e){}
+  }
+  const s = readLocal();
+  if (s){ try { menu = JSON.parse(s); } catch(e){} }
+}
+async function save(msg){
+  const s = JSON.stringify(menu);
+  writeLocal(s);
+  let published = false;
+  if (MENU_API){
+    try { const r = await fetch(MENU_API, {method:"PUT", headers:{"Content-Type":"application/json","x-owner-pin":menu.pin}, body:s}); published = r.ok; } catch(e){}
+  }
+  setStatus(published ? "Published to customers" : (MENU_API ? "Saved here. Couldn't reach the server, try again" : "Saved on this device"));
+  if (msg) toast(msg);
+}
+
+/* ---------- Helpers ---------- */
+const $ = s => document.querySelector(s);
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const money = n => (n == null || isNaN(n)) ? "" : Number(n).toFixed(2);
+const slug = (s,i) => "s" + i + "-" + s.toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"");
+function setStatus(t){ $("#ownStatus").innerHTML = "Owner mode<small>" + esc(t) + "</small>"; }
+let toastT, undoFn = null;
+function toast(msg, undo){
+  $("#toastMsg").textContent = msg;
+  undoFn = undo || null;
+  $("#toastUndo").hidden = !undo;
+  $("#toast").classList.add("show");
+  clearTimeout(toastT); toastT = setTimeout(() => $("#toast").classList.remove("show"), undo ? 6000 : 2600);
+}
+$("#toastUndo").onclick = () => { if (undoFn){ undoFn(); undoFn = null; } $("#toast").classList.remove("show"); };
+
+/* ---------- Render ---------- */
+function renderInfo(){
+  const i = menu.info;
+  $("#mName").textContent = i.name;
+  $("#mServes").textContent = i.serves;
+  $("#mHours").textContent = i.hours;
+  $("#mAddr").textContent = i.addr;
+  $("#mPhone").textContent = i.phone;
+  $("#callBtn").href = "tel:" + i.phone.replace(/[^0-9+]/g,"");
+  $("#mapBtn").href = "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(i.name + " " + i.addr);
+  document.title = i.name + " Menu";
+  $("#special").hidden = !i.special.trim();
+  $("#specialText").textContent = i.special;
+}
+
+function priceHTML(sec, it){
+  if (sec.cols.length){
+    return sec.cols.map(c => {
+      const p = it.prices.find(x => x.label === c);
+      return p && p.price != null ? `<span class="price">${money(p.price)}</span>` : `<span class="price na" aria-label="not available">–</span>`;
+    }).join("");
+  }
+  return "";
+}
+
+function itemHTML(sec, si, it, ii){
+  const vis = !it.hidden;
+  if (!vis && !owner) return "";
+  const tags = [];
+  if (it.out) tags.push(`<span class="tag out">Sold out today</span>`);
+  if (it.hidden) tags.push(`<span class="tag hid">Hidden from customers</span>`);
+  it.tags.forEach(t => tags.push(`<span class="tag">${esc(t)}</span>`));
+  let head;
+  if (sec.cols.length){
+    head = `<div class="grid" style="--n:${sec.cols.length}"><span class="name">${esc(it.name)}</span>${priceHTML(sec,it)}</div>`;
+  } else if (it.prices.length === 1){
+    head = `<div class="row"><span class="name">${esc(it.name)}</span><span class="lead" aria-hidden="true"></span><span class="price">${money(it.prices[0].price)}</span></div>`;
+  } else {
+    const first = it.prices[0] && !it.prices[0].label ? it.prices[0] : null;
+    const rest = first ? it.prices.slice(1) : it.prices;
+    head = `<div class="row"><span class="name">${esc(it.name)}</span>${first ? `<span class="lead" aria-hidden="true"></span><span class="price">${money(first.price)}</span>` : ""}</div>
+      <div class="multi">${rest.map(p => `<span>${esc(p.label)}<b>${money(p.price)}</b></span>`).join("")}</div>`;
+  }
+  const tools = `<div class="own-tools">
+      <button class="tbtn" data-edit="${si}:${ii}">Edit</button>
+      <button class="tbtn ${it.out ? "ok" : "warn"}" data-out="${si}:${ii}">${it.out ? "Back in stock" : "Mark sold out"}</button>
+    </div>`;
+  return `<li class="item${it.out ? " is-out" : ""}${it.hidden ? " hidden-item" : ""}" data-search="${esc((it.name + " " + it.desc).toLowerCase())}">
+      ${head}
+      ${it.desc ? `<p class="desc">${esc(it.desc)}</p>` : ""}
+      ${tags.length ? `<div class="tags">${tags.join("")}</div>` : ""}
+      ${tools}
+    </li>`;
+}
+
+function render(){
+  renderInfo();
+  const secs = menu.sections;
+  const html = secs.map((sec, si) => {
+    if (sec.hidden && !owner) return "";
+    const id = slug(sec.name, si);
+    const cols = sec.cols.length ? `<div class="cols" style="--n:${sec.cols.length}" aria-hidden="true"><span></span>${sec.cols.map(c => `<span>${esc(c)}</span>`).join("")}</div>` : "";
+    return `<section class="sec" id="${id}" data-si="${si}" aria-labelledby="${id}-h">
+      <h2 id="${id}-h">${esc(sec.name)}</h2>
+      ${sec.note ? `<p class="note">${esc(sec.note)}</p>` : ""}
+      ${sec.hidden ? `<div class="tags"><span class="tag hid">Section hidden from customers</span></div>` : ""}
+      <div class="own-tools"><button class="tbtn" data-sec="${si}">Edit section</button><button class="tbtn ok" data-add="${si}">Add a dish</button></div>
+      ${cols}
+      <ul class="items">${sec.items.map((it, ii) => itemHTML(sec, si, it, ii)).join("")}</ul>
+    </section>`;
+  }).join("");
+  $("#menu").innerHTML = html || `<p class="empty">No sections yet. Add one below.</p>`;
+  $("#chips").innerHTML = secs.map((sec, si) => (sec.hidden && !owner) ? "" : `<a class="chip" href="#${slug(sec.name, si)}" data-for="${slug(sec.name, si)}">${esc(sec.name)}</a>`).join("");
+  applySearch();
+  spy();
+}
+
+/* ---------- Search ---------- */
+function applySearch(){
+  const q = $("#q").value.trim().toLowerCase();
+  let any = false;
+  document.querySelectorAll(".sec").forEach(sec => {
+    let shown = 0;
+    sec.querySelectorAll(".item").forEach(li => {
+      const hit = !q || li.dataset.search.includes(q) || sec.querySelector("h2").textContent.toLowerCase().includes(q);
+      li.hidden = !hit; if (hit) shown++;
+    });
+    sec.hidden = q && !shown;
+    if (shown) any = true;
+  });
+  let e = $("#noHits");
+  if (q && !any){
+    if (!e){ e = document.createElement("p"); e.id = "noHits"; e.className = "empty"; $("#menu").appendChild(e); }
+    e.textContent = `Nothing on the menu matches "${$("#q").value.trim()}". Try a shorter word, like "chicken".`;
+  } else if (e) e.remove();
+}
+$("#q").addEventListener("input", applySearch);
+
+/* ---------- Scroll spy ---------- */
+let io;
+function spy(){
+  if (io) io.disconnect();
+  if (!("IntersectionObserver" in window)) return;
+  io = new IntersectionObserver(entries => {
+    entries.forEach(en => {
+      if (en.isIntersecting){
+        document.querySelectorAll(".chip").forEach(c => c.classList.toggle("on", c.dataset.for === en.target.id));
+        const on = document.querySelector(".chip.on");
+        if (on){ const box = $("#chips"); box.scrollTo({left: on.offsetLeft - 16, behavior: "smooth"}); }
+      }
+    });
+  }, {rootMargin: "-130px 0px -70% 0px"});
+  document.querySelectorAll(".sec").forEach(s => io.observe(s));
+}
+
+/* ---------- Owner sign-in ---------- */
+function openDlg(d){ if (d.showModal) d.showModal(); else d.setAttribute("open",""); }
+document.querySelectorAll("[data-close]").forEach(b => b.onclick = () => b.closest("dialog").close());
+
+$("#ownerLink").onclick = () => { $("#pinIn").value = ""; $("#pinErr").textContent = ""; openDlg($("#pinDlg")); setTimeout(() => $("#pinIn").focus(), 50); };
+$("#pinForm").onsubmit = e => {
+  if ($("#pinIn").value === String(menu.pin)){ owner = true; document.body.classList.add("owner"); setStatus(MENU_API ? "Changes publish to customers" : "Changes save on this device"); render(); }
+  else { e.preventDefault(); $("#pinErr").textContent = "That PIN doesn't match. Try again."; $("#pinIn").select(); }
+};
+$("#exitBtn").onclick = () => { owner = false; document.body.classList.remove("owner"); render(); window.scrollTo({top:0}); };
+
+/* ---------- Owner: quick actions ---------- */
+$("#menu").addEventListener("click", e => {
+  const b = e.target.closest("button"); if (!b || !owner) return;
+  if (b.dataset.out){ const [si, ii] = b.dataset.out.split(":").map(Number); const it = menu.sections[si].items[ii]; it.out = !it.out; render(); save(it.out ? `${it.name} marked sold out` : `${it.name} is back on the menu`); }
+  if (b.dataset.edit){ const [si, ii] = b.dataset.edit.split(":").map(Number); editItem(si, ii); }
+  if (b.dataset.add){ addItem(Number(b.dataset.add)); }
+  if (b.dataset.sec){ editSection(Number(b.dataset.sec)); }
+});
+
+/* ---------- Item editor ---------- */
+let cur = null; // {si, ii, isNew}
+function priceRow(label, price, fixed){
+  const d = document.createElement("div");
+  d.className = "prow" + (fixed ? " fixed" : "");
+  d.innerHTML = fixed
+    ? `<span class="lbl">${esc(label)}</span><input type="number" step="0.01" min="0" inputmode="decimal" value="${money(price)}" aria-label="${esc(label)} price" data-label="${esc(label)}">`
+    : `<input type="text" placeholder="Size or option (optional)" value="${esc(label)}" aria-label="Size or option"><input type="number" step="0.01" min="0" inputmode="decimal" value="${money(price)}" aria-label="Price"><button type="button" class="x" aria-label="Remove this price">×</button>`;
+  const x = d.querySelector(".x"); if (x) x.onclick = () => d.remove();
+  return d;
+}
+function fillItem(si, it){
+  const sec = menu.sections[si];
+  $("#itemSec").textContent = "In " + sec.name;
+  $("#iName").value = it.name; $("#iDesc").value = it.desc;
+  const box = $("#iPrices"); box.innerHTML = "";
+  if (sec.cols.length){
+    sec.cols.forEach(c => { const p = it.prices.find(x => x.label === c); box.appendChild(priceRow(c, p ? p.price : null, true)); });
+    $("#iAddPrice").hidden = true; $("#iPriceHint").hidden = false;
+  } else {
+    (it.prices.length ? it.prices : [{label:"", price:null}]).forEach(p => box.appendChild(priceRow(p.label, p.price, false)));
+    $("#iAddPrice").hidden = false; $("#iPriceHint").hidden = true;
+  }
+  $("#iOut").checked = it.out; $("#iHide").checked = it.hidden;
+  $("#iTags").innerHTML = TAGS.map(t => `<label class="tog"><input type="checkbox" value="${esc(t)}" ${it.tags.includes(t) ? "checked" : ""}>${esc(t)}</label>`).join("");
+}
+function editItem(si, ii){ cur = {si, ii, isNew:false}; $("#itemH").textContent = "Edit dish"; $("#iDel").hidden = false; $("#iUp").hidden = $("#iDown").hidden = false; fillItem(si, menu.sections[si].items[ii]); openDlg($("#itemDlg")); }
+function addItem(si){ cur = {si, ii:-1, isNew:true}; $("#itemH").textContent = "Add a dish"; $("#iDel").hidden = true; $("#iUp").hidden = $("#iDown").hidden = true; fillItem(si, {name:"", desc:"", prices:[], tags:[], out:false, hidden:false}); openDlg($("#itemDlg")); setTimeout(() => $("#iName").focus(), 50); }
+$("#iAddPrice").onclick = () => $("#iPrices").appendChild(priceRow("", null, false));
+
+function readItem(){
+  const sec = menu.sections[cur.si];
+  let prices = [];
+  $("#iPrices").querySelectorAll(".prow").forEach(r => {
+    const ins = r.querySelectorAll("input");
+    if (sec.cols.length){ const v = ins[0].value; if (v !== "") prices.push({label: ins[0].dataset.label, price: Math.round(parseFloat(v)*100)/100}); }
+    else { const v = ins[1].value; if (v !== "") prices.push({label: ins[0].value.trim(), price: Math.round(parseFloat(v)*100)/100}); }
+  });
+  return {
+    name: $("#iName").value.trim(), desc: $("#iDesc").value.trim(), prices,
+    tags: [...$("#iTags").querySelectorAll("input:checked")].map(i => i.value),
+    out: $("#iOut").checked, hidden: $("#iHide").checked
+  };
+}
+$("#itemForm").onsubmit = e => {
+  const it = readItem();
+  if (!it.name){ e.preventDefault(); $("#iName").focus(); return; }
+  if (!it.prices.length){ e.preventDefault(); toast("Add at least one price before saving."); return; }
+  const items = menu.sections[cur.si].items;
+  if (cur.isNew) items.push(it); else items[cur.ii] = it;
+  render(); save(cur.isNew ? `${it.name} added` : "Changes saved");
+};
+function moveItem(d){
+  const items = menu.sections[cur.si].items, j = cur.ii + d;
+  if (j < 0 || j >= items.length) return;
+  [items[cur.ii], items[j]] = [items[j], items[cur.ii]]; cur.ii = j; render(); save("Dish moved");
+}
+$("#iUp").onclick = () => moveItem(-1);
+$("#iDown").onclick = () => moveItem(1);
+$("#iDel").onclick = () => {
+  const items = menu.sections[cur.si].items; const gone = items[cur.ii]; const at = cur.ii, si = cur.si;
+  items.splice(at, 1); $("#itemDlg").close(); render();
+  save(); toast(`${gone.name} deleted`, () => { menu.sections[si].items.splice(at, 0, gone); render(); save("Dish restored"); });
+};
+
+/* ---------- Section editor ---------- */
+let curSec = null;
+function editSection(si){
+  curSec = si; const s = menu.sections[si];
+  $("#secH").textContent = "Edit section"; $("#sDel").hidden = false; $("#sUp").hidden = $("#sDown").hidden = false;
+  $("#sName").value = s.name; $("#sNote").value = s.note; $("#sCols").value = s.cols.join(", "); $("#sHide").checked = s.hidden; $("#sPct").value = "";
+  openDlg($("#secDlg"));
+}
+$("#addSecBtn").onclick = () => {
+  curSec = -1; $("#secH").textContent = "Add a section"; $("#sDel").hidden = true; $("#sUp").hidden = $("#sDown").hidden = true;
+  $("#sName").value = ""; $("#sNote").value = ""; $("#sCols").value = ""; $("#sHide").checked = false; $("#sPct").value = "";
+  openDlg($("#secDlg")); setTimeout(() => $("#sName").focus(), 50);
+};
+$("#secForm").onsubmit = e => {
+  const name = $("#sName").value.trim(); if (!name){ e.preventDefault(); $("#sName").focus(); return; }
+  const cols = $("#sCols").value.split(",").map(s => s.trim()).filter(Boolean);
+  if (curSec === -1){ menu.sections.push({name, note: $("#sNote").value.trim(), cols, hidden: $("#sHide").checked, items: []}); render(); save(`${name} added`); return; }
+  const s = menu.sections[curSec];
+  const old = s.cols;
+  s.name = name; s.note = $("#sNote").value.trim(); s.hidden = $("#sHide").checked; s.cols = cols;
+  if (old.join("|") !== cols.join("|")){
+    s.items.forEach(it => { it.prices = it.prices.map((p, k) => cols.length ? {label: cols[k] ?? p.label, price: p.price} : {label: p.label, price: p.price}); });
+  }
+  render(); save("Section saved");
+};
+$("#sApplyPct").onclick = () => {
+  const pct = parseFloat($("#sPct").value); if (isNaN(pct) || pct === 0){ toast("Enter a percent first, like 5 or -5."); return; }
+  const s = menu.sections[curSec]; const before = clone(s.items);
+  s.items.forEach(it => it.prices.forEach(p => { if (p.price != null) p.price = Math.round(p.price * (1 + pct/100) * 100) / 100; }));
+  $("#sPct").value = ""; render(); save();
+  toast(`Prices in ${s.name} ${pct > 0 ? "raised" : "lowered"} ${Math.abs(pct)}%`, () => { s.items = before; render(); save("Prices restored"); });
+};
+function moveSec(d){ const a = menu.sections, j = curSec + d; if (j < 0 || j >= a.length) return; [a[curSec], a[j]] = [a[j], a[curSec]]; curSec = j; render(); save("Section moved"); }
+$("#sUp").onclick = () => moveSec(-1);
+$("#sDown").onclick = () => moveSec(1);
+$("#sDel").onclick = () => {
+  const at = curSec, gone = menu.sections[at];
+  menu.sections.splice(at, 1); $("#secDlg").close(); render(); save();
+  toast(`${gone.name} deleted`, () => { menu.sections.splice(at, 0, gone); render(); save("Section restored"); });
+};
+
+/* ---------- Restaurant info ---------- */
+$("#infoBtn").onclick = () => {
+  const i = menu.info;
+  $("#fSpecial").value = i.special; $("#fName").value = i.name; $("#fServes").value = i.serves; $("#fHours").value = i.hours; $("#fPhone").value = i.phone; $("#fAddr").value = i.addr; $("#fPin").value = "";
+  openDlg($("#infoDlg"));
+};
+$("#infoForm").onsubmit = () => {
+  const i = menu.info;
+  i.special = $("#fSpecial").value.trim(); i.name = $("#fName").value.trim() || i.name; i.serves = $("#fServes").value.trim(); i.hours = $("#fHours").value.trim(); i.phone = $("#fPhone").value.trim() || i.phone; i.addr = $("#fAddr").value.trim();
+  const np = $("#fPin").value.trim(); if (np) menu.pin = np;
+  render(); save(np ? "Saved. Your new PIN is set" : "Restaurant info saved");
+};
+$("#exportBtn").onclick = () => {
+  const blob = new Blob([JSON.stringify(menu, null, 2)], {type:"application/json"});
+  const a = document.createElement("a"); a.href = URL.createObjectURL(blob); a.download = "piccolo-menu-backup.json"; a.click();
+  setTimeout(() => URL.revokeObjectURL(a.href), 1000); toast("Backup downloaded");
+};
+$("#importBtn").onclick = () => $("#importFile").click();
+$("#importFile").onchange = async e => {
+  const f = e.target.files[0]; if (!f) return;
+  try { const m = JSON.parse(await f.text()); if (!m.sections || !m.info) throw 0; menu = m; $("#infoDlg").close(); render(); save("Menu restored from backup"); }
+  catch(err){ toast("That file isn't a menu backup. Choose the file you downloaded from here."); }
+  e.target.value = "";
+};
+$("#resetBtn").onclick = () => {
+  const before = clone(menu); const pin = menu.pin;
+  menu = clone(DEFAULT_MENU); menu.pin = pin; $("#infoDlg").close(); render(); save();
+  toast("Menu reset to the printed version", () => { menu = before; render(); save("Your edits are back"); });
+};
+
+/* ---------- QR card ---------- */
+function drawQR(){
+  const url = $("#qrUrl").value.trim();
+  $("#qrShow").textContent = url.replace(/^https?:\/\//, "");
+  $("#qrName").textContent = menu.info.name;
+  const box = $("#qr"); box.innerHTML = "";
+  if (!url){ box.textContent = "Enter the menu's web address above."; return; }
+  if (window.QRCode){ new QRCode(box, {text: url, width: 400, height: 400, correctLevel: QRCode.CorrectLevel.M}); }
+  else box.textContent = "The QR maker needs an internet connection. Open this page online to make the code.";
+}
+$("#qrBtn").onclick = () => {
+  const here = location.href.split("#")[0].split("?")[0];
+  const hosted = /^https?:/.test(here);
+  $("#qrUrl").value = hosted ? here : "";
+  $("#qrHint").textContent = hosted ? "This is the address customers will open when they scan." : "This menu isn't online yet. Put it on a website, then paste its address here.";
+  drawQR(); openDlg($("#qrDlg"));
+};
+$("#qrUrl").addEventListener("input", drawQR);
+$("#printQr").onclick = () => window.print();
+
+/* ---------- Start ---------- */
+(async () => {
+  await load();
+  render();
+  if (location.hash === "#owner") $("#ownerLink").click();
+})();
+</script>
+</body>
+</html>
